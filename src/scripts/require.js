@@ -388,7 +388,7 @@ var requirejs, require, define;
 
         function getBundleId(moduleName) {
             var bundleId = getOwn(bundlesMap, moduleName);
-            if (!bundleId && bundlesMapExp) {
+            if (!bundleId && bundlesMapExp) { // pssibility for already checked in list??? performance ...
                 eachProp(bundlesMapExp, function (prop, name) {
                     if (moduleName.indexOf(name) === 0) {
                         bundleId = prop;
@@ -398,6 +398,20 @@ var requirejs, require, define;
                 });
             }
             return bundleId;
+        }
+
+        function addBundleMap(bundleName, moduleName) {
+            if (moduleName !== bundleName) {
+                if (moduleName.charAt(moduleName.length - 1) === '*') {
+                    if (!bundlesMapExp) {
+                        bundlesMapExp = {};
+                    }
+                    bundlesMapExp[moduleName.substr(0, moduleName.length - 1)] = bundleName;
+                }
+                else {
+                    bundlesMap[moduleName] = bundleName;
+                }
+            }
         }
 
         //Turns a plugin!resource to [plugin, resource]
@@ -1335,17 +1349,7 @@ var requirejs, require, define;
                 if (cfg.bundles) {
                     eachProp(cfg.bundles, function (value, prop) {
                         each(value, function (v) {
-                            if (v !== prop) {
-                                if (v.charAt(v.length - 1) === '*') {
-                                    if (!bundlesMapExp) {
-                                        bundlesMapExp = {};
-                                    }
-                                    bundlesMapExp[v.substr(0, v.length - 1)] = prop;
-                                }
-                                else {
-                                    bundlesMap[v] = prop;
-                                }
-                            }
+                            addBundleMap(prop, v);
                         });
                     });
                 }
