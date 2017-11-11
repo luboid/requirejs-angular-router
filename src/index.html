@@ -13,22 +13,7 @@
   <script src="/node_modules/core-js/client/shim.min.js"></script>
   <script src="/node_modules/zone.js/dist/zone.js"></script>
   <script src="/config.js"></script>
-  <script src="/node_modules/requirejs/require.js"></script>
-  <script>
-    require.config({
-      baseUrl: './',
-      paths: {
-      },
-      packages: [
-        {
-          name: "loader",
-          location: "loader",
-          main: "index"
-        }
-      ]
-    });
-    require(['main']);
-  </script>
+  <script src="/node_modules/requirejs/require.js" data-main="main"></script>
 </head>
 
 <body>

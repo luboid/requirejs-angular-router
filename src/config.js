@@ -31,27 +31,27 @@ var require = {
   },
   packages: [
     {
-      name: 'mylib',
-      location: '/node_modules/mylib',
-      main: 'dist/index'
+      name: "loader",
+      location: "loader",
+      main: "index"
     }
   ],
   bundles: {
-    tslib: ['tslib'],
-    '@angular/core': ['@angular/core'],
-    '@angular/common': ['@angular/common'],
-    '@angular/compiler': ['@angular/compiler'],
-    '@angular/platform-browser': ['@angular/platform-browser'],
-    '@angular/platform-browser/animations': [
-      '@angular/platform-browser/animations'
-    ],
-    '@angular/platform-browser-dynamic': ['@angular/platform-browser-dynamic'],
-    '@angular/http': ['@angular/http'],
-    '@angular/router': ['@angular/router'],
-    '@angular/forms': ['@angular/forms'],
-    '@angular/common/http': ['@angular/common/http'],
-    '@angular/animations': ['@angular/animations'],
-    '@angular/animations/browser': ['@angular/animations/browser'],
+    //tslib: ['tslib'],
+    //'@angular/core': ['@angular/core'],
+    //'@angular/common': ['@angular/common'],
+    //'@angular/compiler': ['@angular/compiler'],
+    //'@angular/platform-browser': ['@angular/platform-browser'],
+    //'@angular/platform-browser/animations': [
+    //  '@angular/platform-browser/animations'
+    //],
+    //'@angular/platform-browser-dynamic': ['@angular/platform-browser-dynamic'],
+    //'@angular/http': ['@angular/http'],
+    //'@angular/router': ['@angular/router'],
+    //'@angular/forms': ['@angular/forms'],
+    //'@angular/common/http': ['@angular/common/http'],
+    //'@angular/animations': ['@angular/animations'],
+    //'@angular/animations/browser': ['@angular/animations/browser'],
     rxjs: [
       'rxjs/Observable',
       'rxjs/Subject',
@@ -96,7 +96,7 @@ var require = {
   },
   config: {
     'nmText/text': {
-      onXhr: function(xhr, url) {
+      onXhr: function (xhr, url) {
         //Called after the XHR has been created and after the
         //xhr.open() call, but before the xhr.send() call.
         //Useful time to set headers.
