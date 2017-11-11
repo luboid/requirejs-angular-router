@@ -53,6 +53,7 @@ var require = {
     //'@angular/animations': ['@angular/animations'],
     //'@angular/animations/browser': ['@angular/animations/browser'],
     rxjs: [
+      'rxjs/*'/*,
       'rxjs/Observable',
       'rxjs/Subject',
       'rxjs/BehaviorSubject',
@@ -82,7 +83,7 @@ var require = {
       'rxjs/add/operator/do',
       'rxjs/add/operator/delay',
       'rxjs/util/EmptyError',
-      'rxjs/util/isPromise'
+      'rxjs/util/isPromise'*/
     ]
   },
   shim: {},
