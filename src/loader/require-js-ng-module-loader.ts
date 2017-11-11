@@ -8,25 +8,13 @@ import {
   Optional,
   Compiler,
   NgModuleFactory,
-  NgModuleFactoryLoader,
-  SystemJsNgModuleLoader,
-  SystemJsNgModuleLoaderConfig
+  NgModuleFactoryLoader
 } from '@angular/core';
 
 import { RequireJs } from './require-js';
 
 const _SEPARATOR = '#';
 const FACTORY_CLASS_SUFFIX = 'NgFactory';
-
-/*export class SystemJsNgModuleLoaderEx extends SystemJsNgModuleLoader {
-  constructor(
-    compiler: Compiler,
-    @Optional() config?: SystemJsNgModuleLoaderConfig
-  ) {
-    super(compiler, config);
-    debugger;
-  }
-}*/
 
 /**
  * Configuration for SystemJsNgModuleLoader.
@@ -64,7 +52,6 @@ export class RequireJsNgModuleLoader implements NgModuleFactoryLoader {
     @Optional() config?: RequireJsNgModuleLoaderConfig
   ) {
     this._config = config || DEFAULT_CONFIG;
-    debugger;
   }
 
   load(path: string): Promise<NgModuleFactory<any>> {
@@ -73,26 +60,28 @@ export class RequireJsNgModuleLoader implements NgModuleFactoryLoader {
   }
 
   private loadAndCompile(path: string): Promise<NgModuleFactory<any>> {
-    console.log('loadAndCompile:0:', path);
-    let [module, exportName] = path.split(_SEPARATOR);
+    // console.log('loadAndCompile:0:', path);
+    let [moduleLocation, exportName] = path.split(_SEPARATOR);
     if (exportName === undefined) {
       exportName = 'default';
     }
 
-    console.log('loadAndCompile:1:', module);
-    console.log('loadAndCompile:2:', (<any>window).require.toUrl(module));
+    // console.log('loadAndCompile:1:', moduleLocation);
+    // console.log(
+    //   'loadAndCompile:2:',
+    //   (<any>window).require.toUrl(moduleLocation)
+    // );
 
-    return RequireJs.import(module)
-      .then((m: any) => m[exportName])
-      .then((type: any) => checkNotEmpty(type, module, exportName))
+    return RequireJs.import(moduleLocation)
+      .then((module: any) => module[exportName])
+      .then((type: any) => checkNotEmpty(type, moduleLocation, exportName))
       .then((type: any) => {
-        debugger;
         return this.compiler.compileModuleAsync(type);
       });
   }
 
   private loadFactory(path: string): Promise<NgModuleFactory<any>> {
-    let [module, exportName] = path.split(_SEPARATOR);
+    let [moduleLocation, exportName] = path.split(_SEPARATOR);
     let factoryClassSuffix = FACTORY_CLASS_SUFFIX;
     if (exportName === undefined) {
       exportName = 'default';
@@ -100,12 +89,16 @@ export class RequireJsNgModuleLoader implements NgModuleFactoryLoader {
     }
 
     let importLocation =
-      this._config.factoryPathPrefix + module + this._config.factoryPathSuffix;
+      this._config.factoryPathPrefix +
+      moduleLocation +
+      this._config.factoryPathSuffix;
 
-    console.log('loadFactory', require.toUrl(importLocation));
+    // console.log('loadFactory', require.toUrl(importLocation));
     return RequireJs.import(importLocation)
-      .then((m: any) => m[exportName + factoryClassSuffix])
-      .then((factory: any) => checkNotEmpty(factory, module, exportName));
+      .then((module: any) => module[exportName + factoryClassSuffix])
+      .then((factory: any) =>
+        checkNotEmpty(factory, moduleLocation, exportName)
+      );
   }
 }
 
@@ -114,7 +107,6 @@ function checkNotEmpty(
   modulePath: string,
   exportName: string
 ): any {
-  debugger;
   if (!value) {
     throw new Error(`Cannot find '${exportName}' in '${modulePath}'`);
   }
@@ -123,6 +115,5 @@ function checkNotEmpty(
 
 export const requireJsNgModuleFactoryLoaderProvider = {
   provide: NgModuleFactoryLoader,
-  useClass: RequireJsNgModuleLoader,
-  deps: <any>[]
+  useClass: RequireJsNgModuleLoader
 };
