@@ -2,9 +2,9 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { slideInDownAnimation }   from '../animations';
-import { Crisis }         from './crisis.service';
-import { DialogService }  from '../dialog.service';
+import { slideInDownAnimation } from '../core/animations';
+import { Crisis } from './crisis.service';
+import { DialogService } from '../core/dialog.service';
 
 @Component({
   template: `
@@ -23,12 +23,12 @@ import { DialogService }  from '../dialog.service';
   </div>
   `,
   styles: ['input {width: 20em}'],
-  animations: [ slideInDownAnimation ]
+  animations: [slideInDownAnimation]
 })
 export class CrisisDetailComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
-  @HostBinding('style.display')   display = 'block';
-  @HostBinding('style.position')  position = 'absolute';
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
   crisis: Crisis;
   editName: string;
@@ -40,11 +40,10 @@ export class CrisisDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: { crisis: Crisis }) => {
-        this.editName = data.crisis.name;
-        this.crisis = data.crisis;
-      });
+    this.route.data.subscribe((data: { crisis: Crisis }) => {
+      this.editName = data.crisis.name;
+      this.crisis = data.crisis;
+    });
   }
 
   cancel() {
@@ -72,6 +71,8 @@ export class CrisisDetailComponent implements OnInit {
     // so that the CrisisListComponent can select that crisis.
     // Add a totally useless `foo` parameter for kicks.
     // Relative navigation back to the crises
-    this.router.navigate(['../', { id: crisisId, foo: 'foo' }], { relativeTo: this.route });
+    this.router.navigate(['../', { id: crisisId, foo: 'foo' }], {
+      relativeTo: this.route
+    });
   }
 }

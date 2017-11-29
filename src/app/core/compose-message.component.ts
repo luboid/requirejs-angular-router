@@ -1,4 +1,5 @@
 /// <amd-dependency name="module" path="module" />
+
 import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,6 +16,7 @@ export class ComposeMessageComponent {
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'absolute';
 
+  message: string;
   details: string;
   sending = false;
 

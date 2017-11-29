@@ -1,0 +1,12 @@
+{
+  //tsc -p tsconfig-esm-amd.json
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "amd",
+    "rootDir": "./esm/",
+    "outDir": "./aot/"
+  },
+  "include": ["./esm/app/**/*.js", "./esm/app/**/*.ts"],
+  "exclude": ["./esm/app/main.js", "./esm/app/main.d.ts"]
+}

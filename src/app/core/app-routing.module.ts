@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
-import { requireJsNgModuleFactoryLoaderProvider } from '../loader';
+import { requireJsNgModuleFactoryLoaderProvider } from '../loader/require-js-ng-module-loader';
 
 @NgModule({
   imports: [

@@ -30,61 +30,14 @@ var require = {
       '/node_modules/@angular/animations/bundles/animations-browser.umd'
   },
   packages: [
-    {
-      name: "loader",
-      location: "loader",
-      main: "index"
-    }
+    //{
+    //  name: 'loader',
+    //  location: 'loader',
+    //  main: 'index'
+    //}
   ],
   bundles: {
-    //tslib: ['tslib'],
-    //'@angular/core': ['@angular/core'],
-    //'@angular/common': ['@angular/common'],
-    //'@angular/compiler': ['@angular/compiler'],
-    //'@angular/platform-browser': ['@angular/platform-browser'],
-    //'@angular/platform-browser/animations': [
-    //  '@angular/platform-browser/animations'
-    //],
-    //'@angular/platform-browser-dynamic': ['@angular/platform-browser-dynamic'],
-    //'@angular/http': ['@angular/http'],
-    //'@angular/router': ['@angular/router'],
-    //'@angular/forms': ['@angular/forms'],
-    //'@angular/common/http': ['@angular/common/http'],
-    //'@angular/animations': ['@angular/animations'],
-    //'@angular/animations/browser': ['@angular/animations/browser'],
-    rxjs: [
-      'rxjs/*'/*,
-      'rxjs/Observable',
-      'rxjs/Subject',
-      'rxjs/BehaviorSubject',
-      'rxjs/observable/merge',
-      'rxjs/operator/share',
-      'rxjs/operator/map',
-      'rxjs/operator/filter',
-      'rxjs/operator/reduce',
-      'rxjs/operator/mergeAll',
-      'rxjs/operator/first',
-      'rxjs/operator/last',
-      'rxjs/operator/every',
-      'rxjs/operator/concatAll',
-      'rxjs/operator/catch',
-      'rxjs/operator/mergeMap',
-      'rxjs/operator/concatMap',
-      'rxjs/operator/delay',
-      'rxjs/operator/delay',
-      'rxjs/operators',
-      'rxjs/observable/forkJoin',
-      'rxjs/observable/fromPromise',
-      'rxjs/observable/of',
-      'rxjs/observable/from',
-      'rxjs/add/observable/of',
-      'rxjs/add/operator/switchMap',
-      'rxjs/add/operator/map',
-      'rxjs/add/operator/do',
-      'rxjs/add/operator/delay',
-      'rxjs/util/EmptyError',
-      'rxjs/util/isPromise'*/
-    ]
+    rxjs: ['rxjs/*']
   },
   shim: {},
   map: {
@@ -97,7 +50,7 @@ var require = {
   },
   config: {
     'nmText/text': {
-      onXhr: function (xhr, url) {
+      onXhr: function(xhr, url) {
         //Called after the XHR has been created and after the
         //xhr.open() call, but before the xhr.send() call.
         //Useful time to set headers.

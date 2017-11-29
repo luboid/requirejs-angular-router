@@ -3,9 +3,9 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { slideInDownAnimation } from '../animations';
+import { slideInDownAnimation } from '../core/animations';
 
-import { Hero, HeroService }  from './hero.service';
+import { Hero, HeroService } from './hero.service';
 
 @Component({
   template: `
@@ -23,12 +23,12 @@ import { Hero, HeroService }  from './hero.service';
     </p>
   </div>
   `,
-  animations: [ slideInDownAnimation ]
+  animations: [slideInDownAnimation]
 })
 export class HeroDetailComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
-  @HostBinding('style.display')   display = 'block';
-  @HostBinding('style.position')  position = 'absolute';
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'absolute';
 
   hero$: Observable<Hero>;
 
@@ -39,9 +39,9 @@ export class HeroDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.hero$ = this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.service.getHero(params.get('id')));
+    this.hero$ = this.route.paramMap.switchMap((params: ParamMap) =>
+      this.service.getHero(params.get('id'))
+    );
   }
 
   gotoHeroes(hero: Hero) {

@@ -1,0 +1,17 @@
+{
+  //"../../node_modules/.bin/ngc" -p tsconfig-aot.json
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "declaration": true,
+    "rootDir": "./",
+    "outDir": "./esm/"
+  },
+  "include": ["./app/**/*.ts", "./typings.d.ts"],
+  "angularCompilerOptions": {
+    "skipMetadataEmit": true,
+    "skipTemplateCodegen": false,
+    "generateCodeForLibraries": true
+  }
+}
